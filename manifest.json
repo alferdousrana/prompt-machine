@@ -1,0 +1,17 @@
+{
+  "name": "প্রম্পট মেশিন — Fashion Prompt Machine",
+  "short_name": "প্রম্পট মেশিন",
+  "description": "৩-পিস ও উইমেন ক্লোদিং পেজের জন্য ১০০০+ ChatGPT প্রম্পট ও দৈনিক পোস্ট আইডিয়া",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#FBF7FB",
+  "theme_color": "#2B1233",
+  "lang": "bn",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
