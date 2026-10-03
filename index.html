@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>প্রম্পট মেশিন — ফ্যাশন পেজের জন্য ChatGPT প্রম্পট</title>
+  <meta name="description" content="৩-পিস ও উইমেন ক্লোদিং পেজের জন্য ১০০০+ ChatGPT প্রম্পট, দৈনিক পোস্ট আইডিয়া আর কাস্টম প্রম্পট বিল্ডার।" />
+  <meta name="theme-color" content="#2B1233" />
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="icon" href="./icons/icon-192.png" />
+  <link rel="apple-touch-icon" href="./icons/icon-192.png" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Tiro+Bangla&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#home" aria-label="প্রম্পট মেশিন হোম">
+      <img src="./icons/icon-192.png" alt="" width="34" height="34" />
+      <span>প্রম্পট মেশিন</span>
+    </a>
+    <div class="top-actions">
+      <button class="btn-install" id="installBtn" hidden>অ্যাপ ইনস্টল</button>
+      <button class="icon-btn" id="themeBtn" aria-label="থিম পরিবর্তন" title="লাইট / ডার্ক">◐</button>
+      <button class="icon-btn" id="settingsBtn" aria-label="আমার ব্র্যান্ড সেটিংস" title="আমার ব্র্যান্ড">⚙</button>
+    </div>
+  </header>
+
+  <nav class="nav" aria-label="মূল মেনু">
+    <a href="#home" data-view="home"><span class="ni">☀</span>আজকের প্ল্যান</a>
+    <a href="#library" data-view="library"><span class="ni">▦</span>প্রম্পট লাইব্রেরি</a>
+    <a href="#builder" data-view="builder"><span class="ni">✎</span>নিজের প্রম্পট</a>
+    <a href="#saved" data-view="saved"><span class="ni">♥</span>সেভ করা</a>
+  </nav>
+
+  <main id="app">
+    <!-- HOME -->
+    <section class="view" id="view-home">
+      <div class="hello">
+        <p class="date" id="todayDate"></p>
+        <h1 id="helloTitle">আজ কী পোস্ট করবে, ঠিক করে দিলাম</h1>
+      </div>
+
+      <div class="event-strip" id="eventStrip"></div>
+
+      <article class="plan" id="todayPlan" aria-live="polite"></article>
+
+      <div class="plan-actions">
+        <button class="btn" id="shuffleBtn">অন্য আইডিয়া দাও</button>
+        <a class="btn ghost" href="#builder">নিজের আইডিয়া দিয়ে বানাও</a>
+      </div>
+
+      <h2 class="sec-title">ক্যাটাগরি বেছে নাও</h2>
+      <div class="cat-grid" id="catGrid"></div>
+
+      <details class="howto">
+        <summary>কীভাবে ব্যবহার করবে?</summary>
+        <ol>
+          <li>প্রম্পটের “কপি করে ChatGPT খোলো” বাটনে চাপ দাও।</li>
+          <li>“📷 ছবি লাগবে” লেখা থাকলে ChatGPT-তে আগে তোমার ড্রেস/প্রোডাক্টের ছবি আপলোড করো।</li>
+          <li>প্রম্পট পেস্ট করে সেন্ড করো। ছবি পছন্দ না হলে লেখো: “same design, make the background softer” — এভাবে ছোট ছোট পরিবর্তন চাও।</li>
+          <li>বাংলা লেখা ছবিতে মাঝে মাঝে ভুল আসে। দরকার হলে ছবির লেখা ইংরেজিতে রাখো, বাংলা লেখা পরে Canva দিয়ে বসাও।</li>
+        </ol>
+      </details>
+    </section>
+
+    <!-- LIBRARY -->
+    <section class="view" id="view-library" hidden>
+      <div class="lib-head">
+        <h1>প্রম্পট লাইব্রেরি <small id="libCount"></small></h1>
+        <input type="search" id="searchInput" placeholder="খুঁজো: ঈদ, থাম্বনেইল, ক্যাপশন, flat lay..." aria-label="প্রম্পট খুঁজুন" />
+        <div class="chips" id="catChips" role="tablist"></div>
+        <div class="filters">
+          <select id="occFilter" aria-label="উপলক্ষ ফিল্টার"></select>
+          <label class="check"><input type="checkbox" id="photoFilter" /> শুধু ছবি-আপলোড প্রম্পট</label>
+        </div>
+      </div>
+      <div class="list" id="promptList"></div>
+      <button class="btn ghost wide" id="moreBtn" hidden>আরও দেখাও</button>
+    </section>
+
+    <!-- BUILDER -->
+    <section class="view" id="view-builder" hidden>
+      <h1>নিজের প্রম্পট বানাও</h1>
+      <p class="lead">তোমার আইডিয়া বলো, মেশিন সেটাকে ChatGPT-র জন্য গুছিয়ে সেরা প্রম্পট বানিয়ে দেবে। বাংলায় লিখলেও চলবে।</p>
+
+      <form class="builder" id="builderForm" onsubmit="return false">
+        <div class="field full">
+          <label for="bType">কী বানাতে চাও?</label>
+          <select id="bType"></select>
+        </div>
+        <div class="field full">
+          <label for="bSubject">প্রোডাক্ট / বিষয়</label>
+          <input id="bSubject" placeholder="যেমন: মেরুন সুতি থ্রি-পিস, গলায় হাতের কাজ, শিফন ওড়না" />
+        </div>
+        <div class="field full">
+          <label class="check"><input type="checkbox" id="bPhoto" checked /> আমার কাছে প্রোডাক্টের ছবি আছে (ChatGPT-তে আপলোড করব)</label>
+        </div>
+        <div class="field">
+          <label for="bOcc">উপলক্ষ</label>
+          <select id="bOcc"></select>
+        </div>
+        <div class="field">
+          <label for="bStyle">ডিজাইন স্টাইল</label>
+          <select id="bStyle"></select>
+        </div>
+        <div class="field">
+          <label for="bPal">রঙ</label>
+          <select id="bPal"></select>
+        </div>
+        <div class="field">
+          <label for="bRatio">সাইজ</label>
+          <select id="bRatio"></select>
+        </div>
+        <div class="field">
+          <label for="bHeadline">ছবিতে বড় লেখা</label>
+          <input id="bHeadline" placeholder="যেমন: Eid Collection 2027" />
+        </div>
+        <div class="field">
+          <label for="bOffer">অফার / দাম</label>
+          <input id="bOffer" placeholder="যেমন: 20% OFF, ৳1450" />
+        </div>
+        <div class="field">
+          <label for="bTone">ক্যাপশনের টোন</label>
+          <select id="bTone"></select>
+        </div>
+        <div class="field">
+          <label for="bLang">ক্যাপশনের ভাষা</label>
+          <select id="bLang">
+            <option value="Bangla">বাংলা</option>
+            <option value="English">ইংরেজি</option>
+            <option value="Bangla and English (two versions)">বাংলা + ইংরেজি</option>
+          </select>
+        </div>
+        <div class="field full">
+          <label for="bIdea">তোমার আইডিয়া (যা মাথায় আছে লিখে ফেলো)</label>
+          <textarea id="bIdea" rows="4" placeholder="যেমন: মডেল একটা পুরনো জমিদার বাড়ির বারান্দায় দাঁড়িয়ে থাকবে, বিকেলের আলো, পাশে একটা পিতলের কলস..."></textarea>
+        </div>
+        <div class="field full row">
+          <button class="btn" id="buildBtn" type="button">প্রম্পট বানাও</button>
+          <button class="btn ghost" id="randomBuildBtn" type="button">সারপ্রাইজ মি</button>
+        </div>
+      </form>
+
+      <div id="builderOut" hidden></div>
+    </section>
+
+    <!-- SAVED -->
+    <section class="view" id="view-saved" hidden>
+      <h1>সেভ করা প্রম্পট</h1>
+      <div class="chips" id="savedTabs">
+        <button class="chip active" data-tab="fav">পছন্দের</button>
+        <button class="chip" data-tab="mine">আমার বানানো</button>
+      </div>
+      <div class="list" id="savedList"></div>
+    </section>
+  </main>
+
+  <!-- Settings modal -->
+  <dialog id="settingsDlg">
+    <form method="dialog" class="dlg">
+      <h2>আমার ব্র্যান্ড</h2>
+      <p class="muted">এগুলো দিলে প্রতিটা প্রম্পটে নিজে নিজে বসে যাবে।</p>
+      <label>ব্র্যান্ড / পেজের নাম<input id="sBrand" placeholder="যেমন: Rangdhanu Fashion" /></label>
+      <label>পেজ / ইনস্টা হ্যান্ডেল<input id="sPage" placeholder="যেমন: rangdhanu.fashion" /></label>
+      <label>অর্ডারের ফোন নম্বর<input id="sPhone" placeholder="01XXXXXXXXX" inputmode="tel" /></label>
+      <div class="row">
+        <button class="btn" value="save" id="saveSettings">সেভ করো</button>
+        <button class="btn ghost" value="cancel">বাতিল</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Install help modal (iPhone) -->
+  <dialog id="iosDlg">
+    <form method="dialog" class="dlg">
+      <h2>আইফোনে ইনস্টল করো</h2>
+      <ol>
+        <li>Safari-তে এই পেজটা খোলো।</li>
+        <li>নিচের Share বাটনে (□↑) চাপ দাও।</li>
+        <li>“Add to Home Screen” বেছে নাও।</li>
+      </ol>
+      <button class="btn">বুঝেছি</button>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="./data.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
